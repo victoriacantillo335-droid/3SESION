@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniExploradores: PequeMentes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- PANTALLA 1: INICIO -->
+        <section id="screen-start" class="screen active">
+            <h1 class="title">Mundo Mágico Infantil</h1>
+            <div class="avatar">🚀</div>
+            <button class="btn-main" onclick="navigateTo('screen-choice')">¡JUGAR!</button>
+        </section>
+
+        <!-- PANTALLA 2: ELECCIÓN -->
+        <section id="screen-choice" class="screen">
+            <h2 class="subtitle">¿Qué quieres explorar hoy?</h2>
+            <div class="grid-choices">
+                <div class="card" onclick="startLevel('vowels')">🅰️<p>Vocales</p></div>
+                <div class="card" onclick="startLevel('numbers')">🔢<p>Números</p></div>
+                <div class="card" onclick="startLevel('colors')">🎨<p>Colores</p></div>
+                <div class="card" onclick="startLevel('animals')">🦁<p>Animales</p></div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 3: PREGUNTA -->
+        <section id="screen-question" class="screen">
+            <div id="ai-feedback-box" class="ai-bubble">Preparando misión...</div>
+            <h2 id="question-text">Cargando...</h2>
+            <div id="options-container" class="grid-options">
+                <!-- Las opciones se generan con JS -->
+            </div>
+        </section>
+
+        <!-- PANTALLA 4: PUNTAJE / CELEBRACIÓN -->
+        <section id="screen-score" class="screen">
+            <h2 class="title">¡Lo lograste, Explorador!</h2>
+            <div class="final-trophy">🏆</div>
+            <p id="final-summary" class="summary-text"></p>
+            <button class="btn-main" onclick="navigateTo('screen-choice')">Volver a jugar</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

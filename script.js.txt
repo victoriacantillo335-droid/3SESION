@@ -1,0 +1,54 @@
+const gameData = {
+    vowels: { q: "¿Dónde está la letra A?", ans: "A", opts: ["A", "E", "I", "O"] },
+    numbers: { q: "¿Cuál es el número 5?", ans: "5", opts: ["3", "5", "8", "1"] },
+    colors: { q: "¿Cuál es el color Rojo? 🍎", ans: "Rojo", opts: ["Azul", "Rojo", "Verde", "Amarillo"] },
+    animals: { q: "¿Qué animal hace 'Miau'? 🐱", ans: "Gato", opts: ["Perro", "Gato", "Vaca", "León"] }
+};
+
+let currentScore = 0;
+
+function navigateTo(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+}
+
+function startLevel(category) {
+    const level = gameData[category];
+    const feedbackBox = document.getElementById('ai-feedback-box');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+
+    // Simulación de IA: Narrativa envolvente
+    feedbackBox.innerText = `¡Hola! Vamos al mundo de los ${category}. ¡Tú puedes!`;
+    questionText.innerText = level.q;
+    optionsContainer.innerHTML = '';
+
+    level.opts.forEach(opt => {
+        const btn = document.createElement('div');
+        btn.className = 'card';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(opt, level.ans, category);
+        optionsContainer.appendChild(btn);
+    });
+
+    navigateTo('screen-question');
+}
+
+function checkAnswer(selected, correct, category) {
+    const feedbackBox = document.getElementById('ai-feedback-box');
+    
+    if (selected === correct) {
+        currentScore++;
+        feedbackBox.innerText = "¡Excelente! Tu mente brilla como una estrella. ✨";
+        setTimeout(() => showFinalScore(category), 1500);
+    } else {
+        feedbackBox.innerText = "¡Casi! Inténtalo de nuevo, ¡yo confío en ti! 🌈";
+    }
+}
+
+function showFinalScore(category) {
+    const summary = document.getElementById('final-summary');
+    // Retroalimentación personalizada de "IA"
+    summary.innerText = `Hoy aprendiste sobre ${category}. ¡Has ganado ${currentScore} estrellas de sabiduría!`;
+    navigateTo('screen-score');
+}
